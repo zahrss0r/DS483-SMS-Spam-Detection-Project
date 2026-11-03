@@ -77,7 +77,19 @@ We also counted the 15 most common words in each class (lowercase, split on spac
 
 ### Part 3 (Student 3): Regular expressions, tokenization, case and punctuation
 
-_To be added in Week 1._
+This part defines regex based cleaning and tokenization functions to normalize text preserving predictive spam indicators like URLs, money, and numbers while removing punctuation and casing applies them to the dataset, evaluates vocabulary reduction, and aligns with core NLP principles regarding feature sparsity, signal retention, and pipeline hygiene.
+
+
+Sets up of specific contribution (Student 3, Week 1 Part 3).
+
+Function Definitions: Imports Python's built-in regular expression library (re) and defines basic_clean(text) and tokenize(text).
+The cleaning function follows the exact 7-step sequence (lowercase, apostrophe removal, URL replacement, currency replacement, number replacement, punctuation removal, and whitespace normalization) to normalize text while preserving spam-indicator signals like money and links.
+
+Application & Comparison: Applies basic_clean across both train_df and test_df to create the required clean_basic column. It outputs a side-by-side comparison table of the first 5 messages so our group can visually inspect the transformation.
+
+Vocabulary Analysis: Computes and prints the vocabulary size (number of unique tokens) before and after cleaning on the training split, illustrating how normalization reduces noise and shrinks the feature space.
+
+
 
 ### Part 4 (Student 4): Stopwords, stemming and examples before and after
 

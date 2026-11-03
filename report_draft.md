@@ -34,7 +34,46 @@ We split the data into 80% train (4,136 messages) and 20% test (1,035 messages).
 
 ### Part 2 (Student 2): Text characteristics of ham and spam
 
-_To be added in Week 1._
+We studied the text features of ham and spam messages to find which ones can help tell them apart. We made a copy of the data called feat_df and added seven features: number of characters, number of words, number of digits, has a link (http or www), number of currency signs (£ $ €), percent of capital letters, and number of ! marks. To keep the test data unseen, we compared the two classes using only the train data (4,136 messages: 3,614 ham and 522 spam).
+
+Spam messages are much longer than ham messages. The mean length is 137.74 characters for spam and 70.97 for ham, and spam has 23.69 words on average compared with 14.24 for ham. Most spam messages are close to 160 characters, which is the normal SMS limit, while ham messages are shorter and more spread out. The clearest difference is the number of digits: spam has 15.44 digits per message and ham has only 0.31, which is about 50 times less. This is because spam often has phone numbers, prices and prize codes.
+
+Spam also has more currency signs, more exclamation marks and a higher percent of capital letters. Links are not common, but they appear almost only in spam: 14.9% of spam messages have a link, compared with 0.1% of ham. This means a link is a strong sign of spam, but most spam messages do not have one, so it cannot be used alone.
+
+**Table 3. Mean of each feature in the train data**
+
+| Feature | Ham mean | Spam mean |
+| --- | --- | --- |
+| Characters (char_len) | 70.967 | 137.741 |
+| Words (word_len) | 14.241 | 23.690 |
+| Digits (n_digits) | 0.309 | 15.444 |
+| Has link (has_link) | 0.001 | 0.149 |
+| Currency signs (n_currency) | 0.006 | 0.427 |
+| Capital letters % (caps_ratio) | 5.663 | 10.766 |
+| ! marks (n_exclaim) | 0.182 | 0.693 |
+
+We also counted the 15 most common words in each class (lowercase, split on spaces). Ham messages use many personal words like “i”, “u”, “my” and “me”. Spam messages use words like “call”, “your”, “free” and “2”. Seven words, such as “to”, “a”, “you” and “the”, are in both lists, so they do not help to separate the classes. We will use stop word removal in the next steps to get clearer spam words.
+
+**Table 4. Top 15 words in the train data (word count)**
+
+| Rank | Ham word | Count | Spam word | Count |
+| --- | --- | --- | --- | --- |
+| 1 | i | 1,676 | to | 469 |
+| 2 | you | 1,281 | a | 243 |
+| 3 | to | 1,172 | call | 233 |
+| 4 | the | 867 | your | 189 |
+| 5 | a | 760 | you | 182 |
+| 6 | and | 675 | for | 158 |
+| 7 | u | 633 | the | 146 |
+| 8 | in | 583 | or | 129 |
+| 9 | my | 540 | free | 128 |
+| 10 | is | 507 | 2 | 125 |
+| 11 | me | 446 | is | 116 |
+| 12 | for | 392 | ur | 105 |
+| 13 | of | 385 | have | 91 |
+| 14 | it | 357 | on | 91 |
+| 15 | that | 347 | and | 87 |
+
 
 ### Part 3 (Student 3): Regular expressions, tokenization, case and punctuation
 

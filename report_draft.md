@@ -94,9 +94,8 @@ Part 3 (Student 3): regex, tokens, lowercase, punctuation )
 
 ### Part 4 (Student 4): Stopwords, stemming and examples before and after
 
-_To be added in Week 1._
+In this part we finished the text preprocessing. We downloaded the 198 NLTK English stopwords and made a Porter stemmer. Then we built the function full_clean(), which runs basic_clean, tokenize, stopword removal and stemming, and joins the words with spaces. We applied it to train_df and test_df and saved the result in the column clean_text. Nothing was fitted on the test set. The vocabulary in train_df became smaller at each step: 13,600 unique words in the raw message, 7,106 in clean_basic, and 5,794 in clean_text. This is about 57% fewer unique words overall. Only 4 of 4,136 train messages and 2 of 1,035 test messages became empty, for example “Where @” and “Can a not?”, because all their words were stopwords. The examples show that spam words like “win”, “free” and “claim” stay, while common words like “you” and “have” are removed. The LSTM and BERT models will not use clean_text. They will use clean_basic and the raw message.
 
----
 
 ## Task 2: Vector Representation and Similarity
 

@@ -103,6 +103,12 @@ In this part we finished the text preprocessing. We downloaded the 198 NLTK Engl
 
 In this part, we changed the cleaned SMS messages into numbers using TF-IDF. We used TfidfVectorizer with min_df=2, so words that appear in fewer than 2 messages were removed. We fitted the vectorizer only on the train data, which has 4136 messages, and then used it to transform both train and test. This avoids data leakage. The train matrix has shape (4136, 2643) and the test matrix has shape (1035, 2643), so the vocabulary has 2643 words. The train set has 3614 ham and 522 spam messages, and the test set has 904 ham and 131 spam messages. We also checked the top 5 words of one spam message. Its highest weights were moneynum (0.308), suppli (0.294), choic (0.294), worth (0.260), and cd (0.257), which are typical prize and money words. The ham message “U GOIN OUT 2NITE?” is very short, so it has only two weighted words: numnit (0.738) and goin (0.675).
 
+
+##  Part 2 (Student 3): cosine similarity search
+
+To evaluate the semantic clustering of our spam detection dataset, we implemented a cosine similarity search pipeline over the TF-IDF feature space of the training partition. By analyzing the vector representations of representative spam and ham messages, the system successfully identified nearest neighbors that share identical phrasing, promotional structures, or conversational contexts. The resulting similarity scores confirm that vectorized text representations effectively group similar linguistic patterns together, providing a robust foundation for downstream neighborhood-based classification or anomaly detection.
+
+
 ## Task 3: Text Classification
 
 _To be added in Week 3._

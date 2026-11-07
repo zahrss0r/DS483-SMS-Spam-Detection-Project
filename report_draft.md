@@ -99,9 +99,9 @@ In this part we finished the text preprocessing. We downloaded the 198 NLTK Engl
 
 ## Task 2: Vector Representation and Similarity
 
-_To be added in Week 2._
+## Part 1 (Student 2): TF-IDF vectors 
 
----
+In this part, we changed the cleaned SMS messages into numbers using TF-IDF. We used TfidfVectorizer with min_df=2, so words that appear in fewer than 2 messages were removed. We fitted the vectorizer only on the train data, which has 4136 messages, and then used it to transform both train and test. This avoids data leakage. The train matrix has shape (4136, 2643) and the test matrix has shape (1035, 2643), so the vocabulary has 2643 words. The train set has 3614 ham and 522 spam messages, and the test set has 904 ham and 131 spam messages. We also checked the top 5 words of one spam message. Its highest weights were moneynum (0.308), suppli (0.294), choic (0.294), worth (0.260), and cd (0.257), which are typical prize and money words. The ham message “U GOIN OUT 2NITE?” is very short, so it has only two weighted words: numnit (0.738) and goin (0.675).
 
 ## Task 3: Text Classification
 

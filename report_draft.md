@@ -108,6 +108,10 @@ In this part, we changed the cleaned SMS messages into numbers using TF-IDF. We 
 
 To evaluate the semantic clustering of our spam detection dataset, we implemented a cosine similarity search pipeline over the TF-IDF feature space of the training partition. By analyzing the vector representations of representative spam and ham messages, the system successfully identified nearest neighbors that share identical phrasing, promotional structures, or conversational contexts. The resulting similarity scores confirm that vectorized text representations effectively group similar linguistic patterns together, providing a robust foundation for downstream neighborhood-based classification or anomaly detection.
 
+## Part 3 (Student 4): similarity in and between classes
+
+We checked how similar the messages are using cosine similarity on the TF-IDF vectors of the train set (522 spam and 3614 ham messages). The average similarity between two spam messages is 0.1034, which is about 10 times higher than between two ham messages (0.0107). The spam-ham average is 0.0126, so a spam message is not close to ham messages. This shows that spam messages are more similar to each other than ham messages. A reason is that spam messages often use the same style and words, while ham messages are personal and use many different words. The top terms support this. For spam, the highest average TF-IDF terms are num (0.2516), call (0.0732), moneynum (0.0670), free (0.0509), txt (0.0371), claim (0.0308) and prize (0.0295). For ham, the top terms are common daily words like im (0.0229), go (0.0203), ok (0.0189) and get (0.0181), and their values are much lower. Overall, spam has a clear and repeated vocabulary, so it should be easier for a classifier to separate.
+
 
 ## Task 3: Text Classification
 

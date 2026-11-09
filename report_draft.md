@@ -122,7 +122,11 @@ TF-IDF has a limit: it only counts words and does not understand word order or m
 
 ## Task 3: Text Classification
 
-_To be added in Week 3._
+### Week 3 Part 1 (Student 3): evaluation function and results table
+
+This part establishes the shared evaluation framework for our classification tasks by importing timing and metrics utilities, initializing a global results list, and defining reusable functions to compute standard classification metrics (evaluate_model), format and display the summary table (show_results), and plot labeled confusion matrices (plot_cm). Finally, it trains and evaluates a baseline DummyClassifier that always predicts the majority class ("ham"), populating the initial row in our results table to serve as a benchmark for subsequent machine learning models.
+
+
 
 ---
 

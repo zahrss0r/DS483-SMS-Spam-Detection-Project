@@ -112,6 +112,13 @@ To evaluate the semantic clustering of our spam detection dataset, we implemente
 
 We checked how similar the messages are using cosine similarity on the TF-IDF vectors of the train set (522 spam and 3614 ham messages). The average similarity between two spam messages is 0.1034, which is about 10 times higher than between two ham messages (0.0107). The spam-ham average is 0.0126, so a spam message is not close to ham messages. This shows that spam messages are more similar to each other than ham messages. A reason is that spam messages often use the same style and words, while ham messages are personal and use many different words. The top terms support this. For spam, the highest average TF-IDF terms are num (0.2516), call (0.0732), moneynum (0.0670), free (0.0509), txt (0.0371), claim (0.0308) and prize (0.0295). For ham, the top terms are common daily words like im (0.0229), go (0.0203), ok (0.0189) and get (0.0181), and their values are much lower. Overall, spam has a clear and repeated vocabulary, so it should be easier for a classifier to separate.
 
+### Part 4 (Student 1): Task 2 results and explanation
+
+TF-IDF gives each word a weight. The weight is high when a word appears in a message but is rare in the other messages, so common words get a low weight. In spam, the words with the highest average TF-IDF were num (0.25), call (0.07), moneynum (0.07) and free (0.05). moneynum means a money amount like £100 and nump means a price like 150p, so numbers and prices are typical for spam. In ham, the top words were normal chat words like im, go and ok.
+
+Cosine similarity compares the TF-IDF vectors of two messages. It is 1 when they use the same words and 0 when they share no words. Spam messages were much more similar to each other (0.10) than ham messages (0.01). The reason is that spam often comes in campaigns with almost the same text. For example, one spam query had a match with 0.93 similarity, and 4 of its top 5 matches were spam. For all 3 ham queries, the top 5 matches were all ham.
+
+TF-IDF has a limit: it only counts words and does not understand word order or meaning. For example, one spam message about sending anonymous messages was closest to a ham message (0.53), only because both used the word "message".
 
 ## Task 3: Text Classification
 

@@ -99,16 +99,16 @@ In this part we finished the text preprocessing. We downloaded the 198 NLTK Engl
 
 ## Task 2: Vector Representation and Similarity
 
-## Part 1 (Student 2): TF-IDF vectors 
+### Part 1 (Student 2): TF-IDF vectors 
 
 In this part, we changed the cleaned SMS messages into numbers using TF-IDF. We used TfidfVectorizer with min_df=2, so words that appear in fewer than 2 messages were removed. We fitted the vectorizer only on the train data, which has 4136 messages, and then used it to transform both train and test. This avoids data leakage. The train matrix has shape (4136, 2643) and the test matrix has shape (1035, 2643), so the vocabulary has 2643 words. The train set has 3614 ham and 522 spam messages, and the test set has 904 ham and 131 spam messages. We also checked the top 5 words of one spam message. Its highest weights were moneynum (0.308), suppli (0.294), choic (0.294), worth (0.260), and cd (0.257), which are typical prize and money words. The ham message “U GOIN OUT 2NITE?” is very short, so it has only two weighted words: numnit (0.738) and goin (0.675).
 
 
-##  Part 2 (Student 3): cosine similarity search
+### Part 2 (Student 3): cosine similarity search
 
 To evaluate the semantic clustering of our spam detection dataset, we implemented a cosine similarity search pipeline over the TF-IDF feature space of the training partition. By analyzing the vector representations of representative spam and ham messages, the system successfully identified nearest neighbors that share identical phrasing, promotional structures, or conversational contexts. The resulting similarity scores confirm that vectorized text representations effectively group similar linguistic patterns together, providing a robust foundation for downstream neighborhood-based classification or anomaly detection.
 
-## Part 3 (Student 4): similarity in and between classes
+### Part 3 (Student 4): similarity in and between classes
 
 We checked how similar the messages are using cosine similarity on the TF-IDF vectors of the train set (522 spam and 3614 ham messages). The average similarity between two spam messages is 0.1034, which is about 10 times higher than between two ham messages (0.0107). The spam-ham average is 0.0126, so a spam message is not close to ham messages. This shows that spam messages are more similar to each other than ham messages. A reason is that spam messages often use the same style and words, while ham messages are personal and use many different words. The top terms support this. For spam, the highest average TF-IDF terms are num (0.2516), call (0.0732), moneynum (0.0670), free (0.0509), txt (0.0371), claim (0.0308) and prize (0.0295). For ham, the top terms are common daily words like im (0.0229), go (0.0203), ok (0.0189) and get (0.0181), and their values are much lower. Overall, spam has a clear and repeated vocabulary, so it should be easier for a classifier to separate.
 
@@ -126,6 +126,9 @@ TF-IDF has a limit: it only counts words and does not understand word order or m
 
 This part establishes the shared evaluation framework for our classification tasks by importing timing and metrics utilities, initializing a global results list, and defining reusable functions to compute standard classification metrics (evaluate_model), format and display the summary table (show_results), and plot labeled confusion matrices (plot_cm). Finally, it trains and evaluates a baseline DummyClassifier that always predicts the majority class ("ham"), populating the initial row in our results table to serve as a benchmark for subsequent machine learning models.
 
+### Week 3 Part 2 (Student 4): train Naive Bayes and Logistic Regression
+
+In this part we trained two classical models on the TF-IDF features: Multinomial Naive Bayes and Logistic Regression. Naive Bayes trained in 0.0125 seconds, while Logistic Regression took 0.2146 seconds, so Naive Bayes was about 17 times faster to train. Both models then made predictions for all 1,035 test messages very quickly: 0.0066 seconds for Naive Bayes and 0.0011 seconds for Logistic Regression. Naive Bayes predicted 111 messages as spam, and Logistic Regression predicted 118. Naive Bayes has 5,286 parameters (two values for each of the 2,643 words), and Logistic Regression has 2,644 (one coefficient per word plus one intercept). The Logistic Regression coefficients are easy to read. The strongest spam words include “num”, “moneynum”, “url”, “free”, “txt”, “claim” and “prize”. The strongest ham words include “ok”, “ill”, “home”, “work” and “later”, which are normal chat words. The next step is to evaluate both models and compare their scores.
 
 
 ---

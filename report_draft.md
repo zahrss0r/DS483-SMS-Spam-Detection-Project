@@ -130,7 +130,21 @@ This part establishes the shared evaluation framework for our classification tas
 
 In this part we trained two classical models on the TF-IDF features: Multinomial Naive Bayes and Logistic Regression. Naive Bayes trained in 0.0125 seconds, while Logistic Regression took 0.2146 seconds, so Naive Bayes was about 17 times faster to train. Both models then made predictions for all 1,035 test messages very quickly: 0.0066 seconds for Naive Bayes and 0.0011 seconds for Logistic Regression. Naive Bayes predicted 111 messages as spam, and Logistic Regression predicted 118. Naive Bayes has 5,286 parameters (two values for each of the 2,643 words), and Logistic Regression has 2,644 (one coefficient per word plus one intercept). The Logistic Regression coefficients are easy to read. The strongest spam words include “num”, “moneynum”, “url”, “free”, “txt”, “claim” and “prize”. The strongest ham words include “ok”, “ill”, “home”, “work” and “later”, which are normal chat words. The next step is to evaluate both models and compare their scores.
 
+### Part 3 (Student 1): Comparing the two models
 
+We tested Naive Bayes and Logistic Regression on the same test data (1,035 messages: 904 ham and 131 spam). We also compared them with a baseline that always says "ham". The baseline has a high accuracy (87.34%), but its recall and F1 for spam are 0, because it never finds any spam. This shows why accuracy alone is not enough.
+
+Both models are much better than the baseline. Logistic Regression got an accuracy of 98.16%, a precision of 0.97, a recall of 0.88 and an F1-score of 0.92. Naive Bayes got an accuracy of 97.87%, a precision of 0.99, a recall of 0.84 and an F1-score of 0.91.
+
+The confusion matrices show the difference. Naive Bayes put only 1 ham message in the spam folder, but it missed 21 spam messages. Logistic Regression put 3 ham messages in the spam folder and missed 16 spam messages. A ham message in the spam folder is a bigger problem for the user, because they can miss something important. Still, Logistic Regression is a little better overall, because it finds more spam and makes very few mistakes on ham. Both models are very fast and train in less than a second.
+
+**Table. Results on the test data**
+
+| Model | Accuracy | Precision | Recall | F1-score |
+| --- | --- | --- | --- | --- |
+| Baseline (always ham) | 0.8734 | 0.0000 | 0.0000 | 0.0000 |
+| Naive Bayes | 0.9787 | 0.9910 | 0.8397 | 0.9091 |
+| Logistic Regression | 0.9816 | 0.9746 | 0.8779 | 0.9237 |
 ---
 
 ## Task 4: Sequence-Based Classification

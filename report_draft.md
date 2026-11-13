@@ -147,6 +147,10 @@ The confusion matrices show the difference. Naive Bayes put only 1 ham message i
 | Logistic Regression | 0.9816 | 0.9746 | 0.8779 | 0.9237 |
 ---
 
+### Part 4 (Student 2) : wrong predictions and Task 3 write-up
+
+We compared a baseline, Naive Bayes and Logistic Regression on 1035 test messages. The baseline that always predicts ham reached 0.8734 accuracy but found no spam, so accuracy alone is misleading. Naive Bayes reached 0.9787 accuracy and an F1 of 0.9091. Logistic Regression was slightly better with 0.9816 accuracy and an F1 of 0.9237, mainly because its recall was higher (0.8779 against 0.8397). Naive Bayes had the higher precision (0.9910) and trained faster. Together the models made mistakes on 29 messages, and 12 of these were wrong in both. Naive Bayes made 1 false positive and 21 false negatives, and Logistic Regression made 3 false positives and 16 false negatives. The strongest spam words were num, moneynum, url, txt and free. Spam with tricks like F.R.E.E was still caught, but the Logistic Regression spam probability dropped from 0.895 to 0.660. The few real messages that were blocked were short, so short informal messages may be treated unfairly. We choose Logistic Regression as the better model, but a spam filter should keep false positives low.
+
 ## Task 4: Sequence-Based Classification
 
 _To be added in Week 4._

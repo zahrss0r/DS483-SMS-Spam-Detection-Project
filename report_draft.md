@@ -153,7 +153,9 @@ We compared a baseline, Naive Bayes and Logistic Regression on 1035 test message
 
 ## Task 4: Sequence-Based Classification
 
-_To be added in Week 4._
+### Part 1 (Student 4) : Sequence-Based Classification
+
+In this part we prepared the data for the LSTM model. First, we split the 4,136 training messages into 3,722 for training (train_part) and 414 for validation (val_part). The split used stratify, so both sets keep the same spam share of 12.6%. The test set (1,035 messages) was not changed. We used the clean_basic column, because the LSTM reads words in order and needs stopwords and full words. The messages are short: the mean length is 15.6 words, and the 95% length is 33 words. Because of this, MAX_LEN = 40 keeps almost every message complete, although the longest message has 162 words. The TextVectorization layer was adapted on train_part only and learned a vocabulary of 6,742 words, which is lower than VOCAB_SIZE = 10,000. Each message became a sequence of 40 numbers, with zeros as padding at the end. The final shapes are (3722, 40), (414, 40) and (1035, 40).
 
 ---
 

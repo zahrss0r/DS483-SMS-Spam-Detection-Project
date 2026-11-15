@@ -157,7 +157,23 @@ We compared a baseline, Naive Bayes and Logistic Regression on 1035 test message
 
 In this part we prepared the data for the LSTM model. First, we split the 4,136 training messages into 3,722 for training (train_part) and 414 for validation (val_part). The split used stratify, so both sets keep the same spam share of 12.6%. The test set (1,035 messages) was not changed. We used the clean_basic column, because the LSTM reads words in order and needs stopwords and full words. The messages are short: the mean length is 15.6 words, and the 95% length is 33 words. Because of this, MAX_LEN = 40 keeps almost every message complete, although the longest message has 162 words. The TextVectorization layer was adapted on train_part only and learned a vocabulary of 6,742 words, which is lower than VOCAB_SIZE = 10,000. Each message became a sequence of 40 numbers, with zeros as padding at the end. The final shapes are (3722, 40), (414, 40) and (1035, 40).
 
----
+### Part 2 (Student 1): Building and training the LSTM
+
+We built an LSTM model with four layers. The Embedding layer turns each word into a vector of 64 numbers. The LSTM layer (64 units) reads the words in order, so it can learn patterns like "call now" or "you have won". The Dropout layer turns off 30% of the units during training to reduce overfitting. The last Dense layer gives one number between 0 and 1, which is the probability that the message is spam. The model has 673,089 parameters, and most of them (640,000) are in the Embedding layer.
+
+We trained the model for 5 epochs with a batch size of 32, using the adam optimizer and binary cross-entropy loss. We used train_part (3,722 messages) for training and val_part (414 messages) for validation. Training took 27 seconds.
+
+The model learned very fast. After the first epoch, the training loss went down from 0.19 to 0.05. The validation accuracy was high from the start (0.99) and ended at 0.9952 after epoch 5, with a validation loss of 0.038. The validation accuracy went down a little in epoch 4 (0.971), but it went back up in epoch 5. This small change is normal because the validation set is small. We do not see clear overfitting, because the final training loss (0.044) and validation loss (0.038) are close.
+
+**Table. Training results for each epoch**
+
+| Epoch | Train accuracy | Train loss | Validation accuracy | Validation loss |
+| --- | --- | --- | --- | --- |
+| 1 | 0.9374 | 0.1896 | 0.9903 | 0.0406 |
+| 2 | 0.9879 | 0.0538 | 0.9903 | 0.0288 |
+| 3 | 0.9944 | 0.0250 | 0.9903 | 0.0356 |
+| 4 | 0.9957 | 0.0186 | 0.9710 | 0.0748 |
+| 5 | 0.9866 | 0.0443 | 0.9952 | 0.0381 |
 
 ## Task 5: Transformer-Based Classification
 

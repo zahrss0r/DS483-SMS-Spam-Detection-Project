@@ -207,6 +207,11 @@ The LSTM has the best results in our table. Its F1 (0.9355) is higher than Logis
 | True ham | 903 | 1 |
 | True spam | 15 | 116 |
 
+
+### Part 4 (Student 3): compare LSTM and Task 4 write-up
+
+This part closes Task 4 by comparing our sequence-based LSTM model against classical bag-of-words baselines through five steps: adding a section header, calling show_results() to print the evaluation table, plotting a grouped bar chart of Precision, Recall, and F1-Score, inspecting test messages where Logistic Regression and the LSTM disagreed, and writing a final summary weighing predictive performance against parameter count and training time.
+
 ## Task 5: Transformer-Based Classification
 
 _To be added in Week 5._

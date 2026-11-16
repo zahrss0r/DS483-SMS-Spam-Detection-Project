@@ -175,6 +175,38 @@ The model learned very fast. After the first epoch, the training loss went down 
 | 4 | 0.9957 | 0.0186 | 0.9710 | 0.0748 |
 | 5 | 0.9866 | 0.0443 | 0.9952 | 0.0381 |
 
+### Part 3 (Student 2): test the LSTM
+
+We tested the LSTM on test_df (1,035 messages), which was not used for training or validation. The model gives one probability for each message, and we used a threshold of 0.5 to decide spam (1) or ham (0). The prediction took 2.68 seconds. The LSTM predicted 117 messages as spam.
+
+The LSTM got an accuracy of 0.9845, a precision of 0.9915, a recall of 0.8855 and an F1 of 0.9355. The confusion matrix shows that 903 ham messages and 116 spam messages were correct. Only 1 ham message was wrongly marked as spam, but 15 spam messages were missed. This means the model is very careful (high precision), but it still misses about 11% of spam. In total, the LSTM made 16 errors. Most of the errors we looked at were spam messages that were very short or unusual, like "ringtoneking 84484", so the model has little context to use.
+
+The LSTM has the best results in our table. Its F1 (0.9355) is higher than Logistic Regression (0.9237) and Naive Bayes (0.9091), and it made 16 errors, against 19 and 22. But the difference is small, only 3 fewer errors than Logistic Regression, so it may be partly luck. The LSTM is also much more expensive. Training took 18.84 seconds against 0.11 seconds for Logistic Regression, and it has 673,089 parameters against 2,644. For this small dataset, Logistic Regression is almost as good and much cheaper.
+
+**Table. Test results of all models**
+
+| Model | Accuracy | Precision | Recall | F1-Score |
+| --- | --- | --- | --- | --- |
+| Baseline (always ham) | 0.8734 | 0.0000 | 0.0000 | 0.0000 |
+| Naive Bayes | 0.9787 | 0.9910 | 0.8397 | 0.9091 |
+| Logistic Regression | 0.9816 | 0.9746 | 0.8779 | 0.9237 |
+| LSTM | 0.9845 | 0.9915 | 0.8855 | 0.9355 |
+
+**Table. Cost and errors of each model**
+
+| Model | Errors | Train time (s) | Predict time (s) | Parameters |
+| --- | --- | --- | --- | --- |
+| Naive Bayes | 22 | 0.0115 | 0.0008 | 5,286 |
+| Logistic Regression | 19 | 0.1140 | 0.0012 | 2,644 |
+| LSTM | 16 | 18.8414 | 2.6757 | 673,089 |
+
+**Table. Confusion matrix of the LSTM on the test set**
+
+| | Predicted ham | Predicted spam |
+| --- | --- | --- |
+| True ham | 903 | 1 |
+| True spam | 15 | 116 |
+
 ## Task 5: Transformer-Based Classification
 
 _To be added in Week 5._

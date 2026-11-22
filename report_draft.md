@@ -214,4 +214,10 @@ This part closes Task 4 by comparing our sequence-based LSTM model against class
 
 ## Task 5: Transformer-Based Classification
 
-_To be added in Week 5._
+### Part 1 (Student 1): Preparing DistilBERT
+
+For Task 5 we used DistilBERT (distilbert-base-uncased). It is a pretrained model, which means it already learned English from a very large amount of text, so we only need to fine-tune it on our SMS data. DistilBERT is a smaller and faster version of BERT (about 66 million parameters instead of 110 million), and it keeps most of BERT's accuracy. We used a T4 GPU in Colab for this task.
+
+We gave the model the raw message, not clean_basic or clean_text, because BERT has its own tokenizer and it learned from normal text. The tokenizer has a vocabulary of 30,522 tokens. It splits rare words into smaller pieces that it knows. For example, the slang word "lor" became "lo" and "##r". It also adds [CLS] at the start and [SEP] at the end of every message.
+
+In train_part, the messages have 25 tokens on average, and 95% of them have 54 tokens or less. The longest message has 216 tokens. We chose BERT_MAX_LEN = 64, so only 60 of the 3,722 training messages (1.6%) were cut. Shorter messages were padded to 64 tokens, and the attention mask tells the model to ignore the padding. We used the same split as the LSTM: 3,722 messages for training, 414 for validation and 1,035 for testing.
